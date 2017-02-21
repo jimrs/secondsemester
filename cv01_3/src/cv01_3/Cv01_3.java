@@ -24,7 +24,7 @@ public class Cv01_3 {
         //Solution sol = new Solution();  //objektove
         //sol.doShit();
         
-        int[] pole = fillArray(2, 4);
+        int[] pole = fillArray(1, 4);
         
         for (int i = 0; i < pole.length; i++) {
             int j = pole[i];
@@ -54,7 +54,7 @@ public class Cv01_3 {
     
     public static int[] fillArray(int a, int b) {
         int[] pole;
-        pole = new int[b];
+        pole = new int[b-a + 1];
         
         for (int i = 0; a <= b; i++) {
             pole[i] = a++;
