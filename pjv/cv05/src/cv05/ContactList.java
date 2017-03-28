@@ -13,7 +13,7 @@ public class ContactList {
     ArrayList<Contact> contacts;
     
     public ContactList() {
-        contacts = new ArrayList();
+        contacts = new ArrayList<>();
     }
     
     public void addContact(Contact c) {

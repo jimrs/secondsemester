@@ -46,20 +46,16 @@ public class Contact implements Comparable {
     
     @Override
     public String toString() {
-        String ret = "("+jmeno+", "+telefon+", "+adresa+")";
-        return ret;
+        return "("+jmeno+", "+telefon+", "+adresa+")";
     }
     
     @Override
     public int compareTo(Object o) {
         Contact c = (Contact)o;
         
-        int t1 = Integer.parseInt(this.telefon);
-        int t2 = Integer.parseInt(c.telefon);
-        
-        if (t1 == t2)
+        if (this.telefon.compareTo(c.telefon) == 0)
             return 0;
-        if (t1 < t2)
+        if (this.telefon.compareTo(c.telefon) < 0)
             return -1;
         else
             return 1;
