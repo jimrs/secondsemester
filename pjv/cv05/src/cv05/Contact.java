@@ -11,19 +11,25 @@ import java.util.Scanner;
  * @author maresj29
  */
 public class Contact implements Comparable {
-    private String jmeno;
-    private String telefon;
-    private String adresa;
+    public String jmeno;
+    public String telefon;
+    public String adresa;
     
     public Contact() {
         Scanner sc = new Scanner(System.in);
         try {
             System.out.println("Name:");
-            this.jmeno = sc.nextLine();
+            if (!(this.jmeno = sc.nextLine()).matches("[A-Z]{1}[a-z]+[\\s]{1}[A-Z]{1}[a-z]+")) {
+                throw new IllegalArgumentException("Wrong name!");
+            }
             System.out.println("Phone:");
-            this.telefon = sc.nextLine();
-            System.out.println("Address:");
-            this.adresa = sc.nextLine();
+            if (!(this.telefon = sc.nextLine()).matches("[0-9]{9}")) {
+                throw new IllegalArgumentException("Wrong phone!");
+            }
+            System.out.println("[A-Z]{1}.+");
+            if (!(this.adresa = sc.nextLine()).matches("[A-Z]{1}[a-z]+[\\s]{1}[A-Z]{1}[a-z]+")) {
+                throw new IllegalArgumentException("Wrong address!");
+            }
         } catch (Exception e) {
             throw e;
         }
@@ -51,13 +57,7 @@ public class Contact implements Comparable {
     
     @Override
     public int compareTo(Object o) {
-        Contact c = (Contact)o;
-        
-        if (this.telefon.compareTo(c.telefon) == 0)
-            return 0;
-        if (this.telefon.compareTo(c.telefon) < 0)
-            return -1;
-        else
-            return 1;
+        Contact c = (Contact)o;       
+        return this.telefon.compareTo(c.telefon);
     }
 }

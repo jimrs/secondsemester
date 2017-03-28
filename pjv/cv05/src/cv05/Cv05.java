@@ -27,7 +27,10 @@ public class Cv05 {
         cl.addContact(c3);
         //cl.addContact(c4);
         System.out.println(cl);
-        //Collections.sort(cl);
+        Collections.sort(cl.contacts);
+        System.out.println(cl);
+        Collections.sort(cl.contacts, cl);
+        System.out.println(cl);
     }
     
 }

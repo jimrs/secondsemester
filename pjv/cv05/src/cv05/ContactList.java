@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @author maresj29
  */
-public class ContactList {
+public class ContactList implements Comparator {
     ArrayList<Contact> contacts;
     
     public ContactList() {
@@ -24,5 +24,13 @@ public class ContactList {
     public String toString() {
         String ret = contacts.toString();
         return ret;
+    }
+    
+    @Override
+    public int compare(Object o1, Object o2) {
+        Contact c1 = (Contact)o1;
+        Contact c2 = (Contact)o2;
+        
+        return c1.adresa.compareTo(c2.adresa);
     }
 }
