@@ -1,0 +1,13 @@
+cv3_1
+Z:\home\maresj29\Mips\cv3_1\
+Objects\
+0
+1
+minic
+0
+0
+0
+0
+1
+objcopy.exe -O srec cv3_1.out cv3_1.srec
+80020000 start

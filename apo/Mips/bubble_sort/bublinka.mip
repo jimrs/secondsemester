@@ -1,0 +1,16 @@
+bublinka
+C:\!misc\school\apo\bublinka\
+Objects\
+1
+C:\!misc\school\apo\bublinka\bubble_sort.s
+0
+0
+1
+minic
+0
+0
+0
+0
+1
+objcopy.exe -O srec bublinka.out bublinka.srec
+80020000 start
