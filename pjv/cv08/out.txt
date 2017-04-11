@@ -1,0 +1,5 @@
+1 tab	tab	tab	newline
+2 tab	tab	tab	newline
+3 sp sp sp newline
+4 asd
+5 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
