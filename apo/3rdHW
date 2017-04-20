@@ -1,0 +1,37 @@
+s0 = adresa pole
+s1 = 20;
+s1 = 80;
+
+s2 = adresa pole + 80; Nastaveni adresy pocatku vystupniho za konec vstupniho pole
+s3 = 3;
+s3 = 12;
+t1 = 0;
+s1 = 72;
+
+L1:
+t2 = 0;
+t4 = 0;
+
+L2:
+s4 = s0 + t2;
+t0 = prvek ulozeny na adrese s4;
+t4 += t0;
+t2 += 4;
+t3 = 1 pokud t2<s3, 0 else
+jump L2 pokud t2<s3
+
+s2 += 4
+s0 += 4
+
+t1 += 4
+jump L1 pokud t1<s1
+
+1 0 0 1 1 | 0 0 0 1 1 | 0 0 0 1 1 | 
+1 je 0; 2 je 4; 3 je 8; 4 je 12; 23 je 88; 24 je 92 - dalsi miss
+
+1   0  0  1  0 | 0  0  0  1  0 | 0 0 0 1 0 | 0 0 0 1 1 LAST
+WNT WT ST WT ST  ST ST ST WT ST
+
+3 prvni, 2 za kazdy dalsi, 1 posledni
+4 za prvni a posledni, 22 za kazdy jiny
+44+4 = 48
