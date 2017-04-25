@@ -41,6 +41,7 @@ public class Producent extends Thread {
                 String[] splittedLine = line.trim().split("\\s+");
                 for (String word : splittedLine) {
                     stack.add(word);
+                    Main.wordCount.addAndGet(1);
                 }
             }
             buffer.close();

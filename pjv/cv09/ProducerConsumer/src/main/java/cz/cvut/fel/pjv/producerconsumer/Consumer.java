@@ -17,6 +17,7 @@ public class Consumer extends Thread {
         try {
             while (!isInterrupted()) {
                 String word = stack.pop();
+                Main.poppedCount.addAndGet(1);
                 System.out.println(getName() + " :" + word);
             }
         } catch (StackEmptyException ex) {

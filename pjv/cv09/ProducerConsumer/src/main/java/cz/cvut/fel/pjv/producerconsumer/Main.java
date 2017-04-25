@@ -2,32 +2,36 @@ package cz.cvut.fel.pjv.producerconsumer;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    public static final AtomicInteger wordCount = new AtomicInteger(0);
+    public static final AtomicInteger poppedCount = new AtomicInteger(0);
+
     public static void main(String[] args) {
+        for (int c = 0; c < 100; c++) {
 
-        Stack stack = null;
+            Stack stack = new Magazine();
 
-        //inicialize producers
-        Producent[] producentArray = inicializeProducers(stack);
+            //inicialize producers
+            Producent[] producentArray = inicializeProducers(stack);
 
-        //inicialize consuments
-        Consumer[] consumentsArray = inicializeConsuments(stack);
+            //inicialize consuments
+            Consumer[] consumentsArray = inicializeConsuments(stack);
 
-        waitForProducents(producentArray);
+            waitForProducents(producentArray);
 
-        waitForConsuments(stack);
+            waitForConsuments(stack);
 
-        //Interrupt consumers
-        for (int i = 0; i < consumentsArray.length; i++) {
-            consumentsArray[i].interrupt();
+            //Interrupt consumers
+            for (int i = 0; i < consumentsArray.length; i++) {
+                consumentsArray[i].interrupt();
+            }
         }
+        System.out.println(wordCount.get() + " / " + poppedCount.get());
     }
 
     private static Producent[] inicializeProducers(Stack stack) {

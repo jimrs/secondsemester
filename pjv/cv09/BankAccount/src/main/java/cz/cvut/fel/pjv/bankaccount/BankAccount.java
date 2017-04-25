@@ -13,7 +13,7 @@ public class BankAccount {
      * @param amount Amount of money which will be added to the balance.
      * @throws InterruptedException
      */
-    synchronized public void addAmount(double amount) throws InterruptedException {
+    public void addAmount(double amount) throws InterruptedException {
         double balance = getBalance();
         balance += amount;
         Thread.sleep(40);
