@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="Source_server.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="md5.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{90EA13C1-7085-4012-A99E-4D1D4D3FF695}</ProjectGuid>
