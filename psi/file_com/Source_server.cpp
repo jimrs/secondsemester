@@ -39,11 +39,13 @@ int main()
 	SOCKET sock;
 	FILE* file;
 	MD5 md5;
-	char* file_md5_start = (char*)malloc(32);
+	char* file_md5_start = (char*)malloc(33);
 	char* file_md5_end;
 	int size;
 	char* data;
 	int packet_size = 1024;
+	unsigned int crc_start;
+	unsigned int crc_end;
 
 	InitWinsock();
 	struct sockaddr_in local;
@@ -63,6 +65,7 @@ int main()
 	printf("SIZE OF DATA TO BE TRANSMITTED: %d\n", size);
 
 	recvfrom(sock, file_md5_start, 32, NULL, (sockaddr*)&from, &fromlen);	// receiving md5 hash
+	file_md5_start[32] = '\0';
 	printf("RECEIVED MD5\n");
 	printf("FILE MD5 IS: \n%s\n", file_md5_start);
 
@@ -73,14 +76,21 @@ int main()
 		int i = 0;
 		while (packet_size * (i + 1) <= size) {
 			recvfrom(sock, data+(i*packet_size), packet_size, NULL, (sockaddr*)&from, &fromlen);
-			printf("PACKET NUMBER %d RECEIVED: ", (i + 1));
-			if (1) {
-				sendto(sock, "ACK", sizeof("ACK"), 0, (sockaddr*)&from, fromlen);
+			printf("PACKET NUMBER %d RECEIVED: \n", (i + 1));
+			recvfrom(sock, (char*)&crc_start, 4, NULL, (sockaddr*)&from, &fromlen);
+			printf("CRC %d RECEIVED: %d\n", (i + 1), crc_start);
+
+			crc_end = crc32c(0, data + (i*packet_size), packet_size);
+			printf("CRC %d CALCULATED: %d ", (i + 1), crc_end);
+
+			if (crc_start == crc_end) {
 				printf("OK\n");
+				sendto(sock, "ACK", sizeof("ACK"), 0, (sockaddr*)&from, fromlen);				
 				i++;
 			}
 			else {
 				printf("BAD\n");
+				sendto(sock, "BAD", sizeof("BAD"), 0, (sockaddr*)&from, fromlen);
 			}	
 		}
 
@@ -96,7 +106,7 @@ int main()
 		file_md5_end = md5.digestFile("recv.jpg");													// start of md5check
 		printf("RECEIVED AND SAVED HASH:\n%s\n%s\n", file_md5_start, file_md5_end);
 
-		if (file_md5_start == file_md5_end) {
+		if (strcmp(file_md5_start, file_md5_end) == 0) {
 			sendto(sock, "HASHOK", sizeof("HASHOK"), 0, (sockaddr*)&from, fromlen);
 			printf("MD5 CHECK OK\n");
 			printf("TRANSACTION COMPLETE\n");

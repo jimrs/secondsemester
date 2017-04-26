@@ -70,7 +70,7 @@ int main()
 	int len = sizeof(server);
 	server.sin_family = AF_INET;
 	server.sin_port = htons(8888);							// port to communicate on
-	server.sin_addr.s_addr = inet_addr("127.0.0.1");	// server IP address
+	server.sin_addr.s_addr = inet_addr("147.32.221.24");	// server IP address
 
 	sock = socket(AF_INET, SOCK_DGRAM, 0);					// initialize socket
 	printf("SOCKET INITIALIZED\n");
